@@ -2,8 +2,10 @@ package com.github.glowingpotato.fastredstone.graph;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public final class Vertex {
 	private DAG dag;
@@ -48,6 +50,24 @@ public final class Vertex {
 				edge.remove();
 			}
 		});
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		Map<Vertex, Integer> map = new HashMap<>();
+		int i = 0;
+		for (Vertex vertex : getDag().getVertices()) {
+			map.put(vertex, ++i);
+		}
+		for (Edge edge : getSourcedEdges()) {
+			result = prime * result + 3 * map.get(edge.getSink());
+		}
+		for (Edge edge : getSunkEdges()) {
+			result = prime * result + 5 * map.get(edge.getSource());
+		}
+		return result;
 	}
 
 	public Vertex(DAG dag) {
