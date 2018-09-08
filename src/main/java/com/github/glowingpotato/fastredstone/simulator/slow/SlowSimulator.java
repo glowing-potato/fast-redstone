@@ -53,10 +53,10 @@ public class SlowSimulator implements ISimulator {
 			}
 		}
 		for (DelayMapping map : delays) {
-			map.setValue(done.get(map.getSink()));
+			map.setValue(!done.get(map.getSink()));
 		}
 		for (IOMapping map : outputs) {
-			map.setValue(done.get(map.getVertex()));
+			map.setValue(!done.get(map.getVertex()));
 		}
 	}
 }
