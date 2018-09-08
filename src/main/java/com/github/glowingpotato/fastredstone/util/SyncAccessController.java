@@ -44,8 +44,9 @@ public class SyncAccessController {
 	public <T> T write(Supplier<T> func) {
 		try {
 			if (writeSemaphore.availablePermits() == 0) {
+				int i = 0;
 				for (StackTraceElement frame : Thread.currentThread().getStackTrace()) {
-					if (frame.getClassName() == SyncAccessController.class.getName()
+					if (++i > 3 && frame.getClassName() == SyncAccessController.class.getName()
 							&& frame.getMethodName() == "write") {
 						return func.get();
 					}
