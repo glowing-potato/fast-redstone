@@ -3,10 +3,21 @@ package com.github.glowingpotato.fastredstone.simulator;
 import com.github.glowingpotato.fastredstone.graph.DAG;
 import com.github.glowingpotato.fastredstone.graph.Vertex;
 
+import net.minecraft.util.math.BlockPos;
+
 public class DelayMapping {
+	private BlockPos pos;
 	private Vertex source;
 	private Vertex sink;
 	private boolean value;
+
+	public BlockPos getBlockPos() {
+		return pos;
+	}
+
+	public void setBlockPos(BlockPos pos) {
+		this.pos = pos;
+	}
 
 	public DAG getDag() {
 		return source.getDag();
@@ -52,6 +63,13 @@ public class DelayMapping {
 
 	public void setValue(boolean value) {
 		this.value = value;
+	}
+
+	public DelayMapping(Vertex source, Vertex sink, boolean value, BlockPos pos) {
+		setBlockPos(pos);
+		setSource(source);
+		setSink(sink);
+		setValue(value);
 	}
 
 	public DelayMapping(Vertex source, Vertex sink, boolean value) {
