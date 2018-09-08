@@ -6,6 +6,7 @@ import com.github.glowingpotato.fastredstone.graph.Vertex;
 public class DelayMapping {
 	private Vertex source;
 	private Vertex sink;
+	private boolean value;
 
 	public DAG getDag() {
 		return source.getDag();
@@ -39,8 +40,20 @@ public class DelayMapping {
 		this.sink = sink;
 	}
 
-	public DelayMapping(Vertex source, Vertex sink) {
+	public boolean getValue() {
+		return value;
+	}
+
+	public void setValue(boolean value) {
+		this.value = value;
+	}
+
+	public DelayMapping(Vertex source, Vertex sink, boolean value) {
 		setSource(source);
 		setSink(sink);
+	}
+
+	public DelayMapping(Vertex source, Vertex sink) {
+		this(source, sink, false);
 	}
 }
