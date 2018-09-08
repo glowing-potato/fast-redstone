@@ -30,11 +30,14 @@ public final class Path {
 	}
 
 	static boolean tryCreate(Vertex from, Vertex to, List<Edge> edges, Set<Vertex> triedVertices) {
+		if (from == to) {
+			return true;
+		}
 		return from.getDag().access.read(() -> {
 			for (Edge edge : from.getSourcedEdges()) {
 				edges.add(edge);
 				Vertex sink = edge.getSink();
-				if (edge.getSink() == sink) {
+				if (sink == to) {
 					return true;
 				} else if (triedVertices.contains(sink)) {
 					return false;

@@ -47,5 +47,6 @@ public final class DAG {
 	public DAG() {
 		vertices = new LinkedList<>();
 		edges = new LinkedList<>();
+		access = new SyncAccessController();
 	}
 }

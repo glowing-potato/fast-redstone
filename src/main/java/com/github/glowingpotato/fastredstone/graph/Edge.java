@@ -29,6 +29,12 @@ public final class Edge {
 	}
 
 	public Edge(Vertex source, Vertex sink) {
+		if (source == null) {
+			throw new IllegalArgumentException("Source vertex cannot be null.");
+		}
+		if (sink == null) {
+			throw new IllegalArgumentException("Sink vertex cannot be null.");
+		}
 		dag = source.getDag();
 		dag.access.write(() -> {
 			if (sink.getDag() != dag) {
