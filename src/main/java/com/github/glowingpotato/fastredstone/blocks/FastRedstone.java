@@ -56,54 +56,6 @@ public abstract class FastRedstone extends Block {
 
 		// array to hold paths (0 = up, 1 = down, 2 = north, 3 = south, 4 = east, 5 =
 		// west)
-		EnumFacing[] paths = new EnumFacing[6];
-		BlockPos curpos = pos;
-		int directions = 0;
-		while (true) {
-
-			Block blockAt = world.getBlockState(curpos).getBlock();
-			if (blockAt instanceof Delayer) {
-				// if (world.getBlockState(curpos).getValue(Delayer.FACING) == EnumFacing)
-			}
-
-			if (!visited.contains(curpos.up()) && (paths[0] = world.getBlockState(curpos.up()).getBlock() instanceof FastRedstone ? EnumFacing.UP : null) != null) {
-				directions++;
-			}
-			if (!visited.contains(curpos.down()) && (paths[1] = world.getBlockState(curpos.down()).getBlock() instanceof FastRedstone ? EnumFacing.DOWN : null) != null) {
-				directions++;
-			}
-			if (!visited.contains(curpos.north()) && (paths[2] = world.getBlockState(curpos.north()).getBlock() instanceof FastRedstone ? EnumFacing.NORTH : null) != null) {
-				directions++;
-			}
-			if (!visited.contains(curpos.south()) && (paths[3] = world.getBlockState(curpos.south()).getBlock() instanceof FastRedstone ? EnumFacing.SOUTH : null) != null) {
-				directions++;
-			}
-			if (!visited.contains(curpos.east()) && (paths[4] = world.getBlockState(curpos.east()).getBlock() instanceof FastRedstone ? EnumFacing.EAST : null) != null) {
-				directions++;
-			}
-			if (!visited.contains(curpos.west()) && (paths[5] = world.getBlockState(curpos.west()).getBlock() instanceof FastRedstone ? EnumFacing.WEST : null) != null) {
-				directions++;
-			}
-
-			if (directions > 1) {
-				for (int i = 0; i < paths.length; i++) {
-					if (paths[i] != null) {
-						visited.add(curpos);
-						buildGraph(dag, world, curpos.offset(paths[i]), visited, inputs, delays, outputs);
-					}
-				}
-			} else if (directions == 0) {
-				break;
-			} else {
-				for (int i = 0; i < paths.length; i++) {
-					if (paths[i] != null) {
-						visited.add(curpos);
-						curpos = curpos.offset(paths[i]);
-						break;
-					}
-				}
-			}
-		}
 
 	}
 
