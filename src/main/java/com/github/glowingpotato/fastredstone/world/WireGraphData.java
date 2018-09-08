@@ -10,10 +10,8 @@ import com.github.glowingpotato.fastredstone.graph.Edge;
 import com.github.glowingpotato.fastredstone.graph.Vertex;
 import com.github.glowingpotato.fastredstone.simulator.DelayMapping;
 import com.github.glowingpotato.fastredstone.simulator.IOMapping;
-import com.github.glowingpotato.fastredstone.util.KeyValuePair;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
