@@ -132,4 +132,25 @@ class SlowSimulatorTest {
 		test(__(0, 2, 0, 4, 1, 3, 1, 4, 2, 5, 3, 5, 4, 6, 5, 6), __(0, 1), __(6),
 				__(__(false, false, true), __(false, true, false), __(true, false, false), __(true, true, true)));
 	}
+
+	@Test
+	void testFlipFlop() {
+		test(__(0, 2, 1, 4, 4, 2, 3, 5, 5, 4, 3, 6), __(0, 1), __(3, 2), __(6), (input, delay, output, sim) -> {
+			input[0].setValue(true);
+			input[1].setValue(false);
+			sim.run();
+			input[0].setValue(false);
+			for (int i = 0; i < 5; ++i) {
+				sim.run();
+				Assertions.assertTrue(output[0].getValue());
+			}
+			input[1].setValue(true);
+			sim.run();
+			input[1].setValue(false);
+			for (int i = 0; i < 5; ++i) {
+				sim.run();
+				Assertions.assertFalse(output[0].getValue());
+			}
+		});
+	}
 }
