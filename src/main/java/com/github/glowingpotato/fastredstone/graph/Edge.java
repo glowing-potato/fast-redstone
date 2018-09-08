@@ -21,23 +21,27 @@ public final class Edge {
 	}
 
 	public void remove() {
-		dag.removeEdge(this);
-		source.removeSourcedEdge(this);
-		sink.removeSunkEdge(this);
+		dag.access.write(() -> {
+			dag.removeEdge(this);
+			source.removeSourcedEdge(this);
+			sink.removeSunkEdge(this);
+		});
 	}
 
 	public Edge(Vertex source, Vertex sink) {
 		dag = source.getDag();
-		if (sink.getDag() != dag) {
-			throw new IllegalArgumentException("An edge cannot connect two vertices on different graphs.");
-		}
-		if (Path.tryCreate(sink, source, new ArrayList<>(), new HashSet<>())) {
-			throw new GraphSolveException("Adding this edge would create a cyclic graph.");
-		}
-		this.source = source;
-		this.sink = sink;
-		dag.addEdge(this);
-		source.addSourcedEdge(this);
-		sink.addSunkEdge(this);
+		dag.access.write(() -> {
+			if (sink.getDag() != dag) {
+				throw new IllegalArgumentException("An edge cannot connect two vertices on different graphs.");
+			}
+			if (Path.tryCreate(sink, source, new ArrayList<>(), new HashSet<>())) {
+				throw new GraphSolveException("Adding this edge would create a cyclic graph.");
+			}
+			this.source = source;
+			this.sink = sink;
+			dag.addEdge(this);
+			source.addSourcedEdge(this);
+			sink.addSunkEdge(this);
+		});
 	}
 }

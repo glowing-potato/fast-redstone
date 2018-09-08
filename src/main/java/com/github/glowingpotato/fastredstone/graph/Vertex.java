@@ -15,11 +15,11 @@ public final class Vertex {
 	}
 
 	public Collection<Edge> getSourcedEdges() {
-		return Collections.unmodifiableCollection(sourcedEdges);
+		return dag.access.read(() -> Collections.unmodifiableCollection(sourcedEdges));
 	}
 
 	public Collection<Edge> getSunkEdges() {
-		return Collections.unmodifiableCollection(sunkEdges);
+		return dag.access.read(() -> Collections.unmodifiableCollection(sunkEdges));
 	}
 
 	void addSourcedEdge(Edge edge) {
@@ -39,14 +39,17 @@ public final class Vertex {
 	}
 
 	public void remove() {
-		dag.removeVertex(this);
-		sourcedEdges.forEach(edge -> edge.remove());
-		sunkEdges.forEach(edge -> edge.remove());
+		dag.access.write(() -> {
+			dag.removeVertex(this);
+			sourcedEdges.forEach(edge -> edge.remove());
+			sunkEdges.forEach(edge -> edge.remove());
+		});
 	}
 
 	public Vertex(DAG dag) {
 		this.dag = dag;
 		sourcedEdges = new LinkedList<>();
 		sunkEdges = new LinkedList<>();
+		dag.access.write(() -> dag.addVertex(this));
 	}
 }
