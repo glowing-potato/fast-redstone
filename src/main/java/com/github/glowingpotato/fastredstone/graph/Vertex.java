@@ -52,8 +52,7 @@ public final class Vertex {
 		});
 	}
 
-	@Override
-	public int hashCode() {
+	public int singleHashCode() {
 		final int prime = 31;
 		int result = 1;
 		Map<Vertex, Integer> map = new HashMap<>();
