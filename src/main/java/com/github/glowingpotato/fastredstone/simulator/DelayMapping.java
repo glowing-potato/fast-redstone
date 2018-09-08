@@ -3,8 +3,6 @@ package com.github.glowingpotato.fastredstone.simulator;
 import com.github.glowingpotato.fastredstone.graph.DAG;
 import com.github.glowingpotato.fastredstone.graph.Vertex;
 
-import net.minecraft.util.math.BlockPos;
-
 public class DelayMapping {
 
 	private Vertex source;

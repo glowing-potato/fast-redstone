@@ -2,15 +2,12 @@ package com.github.glowingpotato.fastredstone.blocks;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 
 import com.github.glowingpotato.fastredstone.graph.DAG;
-import com.github.glowingpotato.fastredstone.graph.Vertex;
 import com.github.glowingpotato.fastredstone.simulator.DelayMapping;
 import com.github.glowingpotato.fastredstone.simulator.IOMapping;
 import com.github.glowingpotato.fastredstone.simulator.ISimulator;
 import com.github.glowingpotato.fastredstone.simulator.slow.SlowSimulator;
-import com.github.glowingpotato.fastredstone.util.KeyValuePair;
 import com.github.glowingpotato.fastredstone.world.WireGraphData;
 
 import net.minecraft.block.Block;
