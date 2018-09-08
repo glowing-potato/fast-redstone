@@ -37,8 +37,11 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
-/eclipse/*
-!/eclipse/.metadata
-/eclipse/.metadata/*
-!/eclipse/.metadata/.plugins
 /run/
+/bin/
+
+/eclipse/.metadata/.plugins/org.eclipse.core.runtime/
+.classpath
+.project
+.settings/
+*.launch
