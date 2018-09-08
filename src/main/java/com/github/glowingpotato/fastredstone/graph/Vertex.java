@@ -41,12 +41,19 @@ public final class Vertex {
 	public void remove() {
 		dag.access.write(() -> {
 			dag.removeVertex(this);
-			sourcedEdges.forEach(edge -> edge.remove());
-			sunkEdges.forEach(edge -> edge.remove());
+			for (Edge edge : sourcedEdges.toArray(new Edge[0])) {
+				edge.remove();
+			}
+			for (Edge edge : sunkEdges.toArray(new Edge[0])) {
+				edge.remove();
+			}
 		});
 	}
 
 	public Vertex(DAG dag) {
+		if (dag == null) {
+			throw new IllegalArgumentException("The DAG cannot be null.");
+		}
 		this.dag = dag;
 		sourcedEdges = new LinkedList<>();
 		sunkEdges = new LinkedList<>();

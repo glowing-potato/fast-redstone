@@ -113,6 +113,20 @@ class EdgeTest {
 	}
 
 	@Test
+	void testVertexLinks() {
+		DAG dag = new DAG();
+		Vertex v1 = dag.createVertex();
+		Vertex v2 = dag.createVertex();
+		Edge e = dag.createEdge(v1, v2);
+		Assertions.assertSame(1, v1.getSourcedEdges().size());
+		Assertions.assertSame(0, v1.getSunkEdges().size());
+		Assertions.assertSame(0, v2.getSourcedEdges().size());
+		Assertions.assertSame(1, v2.getSunkEdges().size());
+		Assertions.assertSame(e, v1.getSourcedEdges().iterator().next());
+		Assertions.assertSame(e, v2.getSunkEdges().iterator().next());
+	}
+
+	@Test
 	void testRemove() {
 		Assertions.assertSame(13, dag.getEdges().size());
 		Edge edge = dag.getEdges().iterator().next();
