@@ -23,6 +23,9 @@ public class DelayMapping {
 		if (sink != null && sink.getDag() != source.getDag()) {
 			throw new IllegalArgumentException("Source and sink vertices must both be on the same DAG.");
 		}
+		if (source == sink) {
+			throw new IllegalArgumentException("Source and sink vertices cannot be the same.");
+		}
 		this.source = source;
 	}
 
@@ -36,6 +39,9 @@ public class DelayMapping {
 		}
 		if (source != null && source.getDag() != sink.getDag()) {
 			throw new IllegalArgumentException("Source and sink vertices must both be on the same DAG.");
+		}
+		if (source == sink) {
+			throw new IllegalArgumentException("Source and sink vertices cannot be the same.");
 		}
 		this.sink = sink;
 	}
@@ -51,6 +57,7 @@ public class DelayMapping {
 	public DelayMapping(Vertex source, Vertex sink, boolean value) {
 		setSource(source);
 		setSink(sink);
+		setValue(value);
 	}
 
 	public DelayMapping(Vertex source, Vertex sink) {
