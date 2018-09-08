@@ -51,6 +51,12 @@ public final class Path {
 	}
 
 	public Path(Vertex from, Vertex to) {
+		if (from == null) {
+			throw new IllegalArgumentException("Source vertex cannot be null.");
+		}
+		if (to == null) {
+			throw new IllegalArgumentException("Target vertex cannot be null.");
+		}
 		dag = from.getDag();
 		dag.access.write(() -> {
 			if (to.getDag() != dag) {
