@@ -1,5 +1,8 @@
 package com.github.glowingpotato.fastredstone.graph;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public final class Edge {
 	private DAG dag;
 	private Vertex source;
@@ -25,11 +28,14 @@ public final class Edge {
 
 	public Edge(Vertex source, Vertex sink) {
 		dag = source.getDag();
+		if (sink.getDag() != dag) {
+			throw new IllegalArgumentException("An edge cannot connect two vertices on different graphs.");
+		}
+		if (Path.tryCreate(sink, source, new ArrayList<>(), new HashSet<>())) {
+			throw new GraphSolveException("Adding this edge would create a cyclic graph.");
+		}
 		this.source = source;
 		this.sink = sink;
-		if (sink.getDag() != dag) {
-			throw new IllegalArgumentException("An edge cannot connect two vertices on different graphs");
-		}
 		dag.addEdge(this);
 		source.addSourcedEdge(this);
 		sink.addSunkEdge(this);
