@@ -102,4 +102,34 @@ class SlowSimulatorTest {
 		test(__(0, 2, 1, 3, 2, 4, 3, 4, 4, 5), __(0, 1), __(5),
 				__(__(false, false, false), __(false, true, false), __(true, false, false), __(true, true, true)));
 	}
+
+	@Test
+	void testNandGate() {
+		test(__(0, 2, 1, 3, 2, 4, 3, 4), __(0, 1), __(4),
+				__(__(false, false, true), __(false, true, true), __(true, false, true), __(true, true, false)));
+	}
+
+	@Test
+	void testOrGate() {
+		test(__(0, 2, 1, 2), __(0, 1), __(2),
+				__(__(false, false, false), __(false, true, true), __(true, false, true), __(true, true, true)));
+	}
+
+	@Test
+	void testNorGate() {
+		test(__(0, 2, 1, 2, 2, 3), __(0, 1), __(3),
+				__(__(false, false, true), __(false, true, false), __(true, false, false), __(true, true, false)));
+	}
+
+	@Test
+	void testXorGate() {
+		test(__(0, 2, 0, 4, 1, 3, 1, 4, 2, 5, 3, 5, 4, 6, 5, 6, 6, 7), __(0, 1), __(7),
+				__(__(false, false, false), __(false, true, true), __(true, false, true), __(true, true, false)));
+	}
+
+	@Test
+	void testXnorGate() {
+		test(__(0, 2, 0, 4, 1, 3, 1, 4, 2, 5, 3, 5, 4, 6, 5, 6), __(0, 1), __(6),
+				__(__(false, false, true), __(false, true, false), __(true, false, false), __(true, true, true)));
+	}
 }
