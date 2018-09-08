@@ -47,15 +47,12 @@ public abstract class FastRedstone extends Block {
 	}
 
 	private void simulate(World world, BlockPos pos) {
-		Collection<IOMapping> inputs = new ArrayList<IOMapping>();
-		Collection<DelayMapping> delays = new ArrayList<DelayMapping>();
-		Collection<IOMapping> outputs = new ArrayList<IOMapping>();
-		buildGraph(WireGraphData.get(world).getGraph(), world, pos, new ArrayList<BlockPos>(), inputs, delays, outputs, WireGraphData.get(world).getVertexMapping());
-		simulator.simulate(inputs, delays, outputs);
+		WireGraphData data = WireGraphData.get(world);
+		buildGraph(data.getGraph(), world, pos, new ArrayList<BlockPos>(), data.getInputMapping(), data.getDelayMapping(), data.getOutputMapping());
+		simulator.simulate(data.getInputMapping(), data.getDelayMapping(), data.getOutputMapping());
 	}
 
-	private void buildGraph(DAG dag, World world, BlockPos pos, ArrayList<BlockPos> visited, Collection<IOMapping> inputs, Collection<DelayMapping> delays, Collection<IOMapping> outputs,
-			HashMap<Vertex, KeyValuePair<BlockPos, Boolean>> vertexMapping) {
+	private void buildGraph(DAG dag, World world, BlockPos pos, ArrayList<BlockPos> visited, Collection<IOMapping> inputs, Collection<DelayMapping> delays, Collection<IOMapping> outputs) {
 
 		// array to hold paths (0 = up, 1 = down, 2 = north, 3 = south, 4 = east, 5 =
 		// west)
@@ -66,7 +63,7 @@ public abstract class FastRedstone extends Block {
 
 			Block blockAt = world.getBlockState(curpos).getBlock();
 			if (blockAt instanceof Delayer) {
-				//if (world.getBlockState(curpos).getValue(Delayer.FACING) == EnumFacing)
+				// if (world.getBlockState(curpos).getValue(Delayer.FACING) == EnumFacing)
 			}
 
 			if (!visited.contains(curpos.up()) && (paths[0] = world.getBlockState(curpos.up()).getBlock() instanceof FastRedstone ? EnumFacing.UP : null) != null) {
@@ -92,7 +89,7 @@ public abstract class FastRedstone extends Block {
 				for (int i = 0; i < paths.length; i++) {
 					if (paths[i] != null) {
 						visited.add(curpos);
-						buildGraph(dag, world, curpos.offset(paths[i]), visited, inputs, delays, outputs, vertexMapping);
+						buildGraph(dag, world, curpos.offset(paths[i]), visited, inputs, delays, outputs);
 					}
 				}
 			} else if (directions == 0) {

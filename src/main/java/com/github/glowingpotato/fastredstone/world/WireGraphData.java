@@ -1,11 +1,15 @@
 package com.github.glowingpotato.fastredstone.world;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import com.github.glowingpotato.fastredstone.FastRedstoneMod;
 import com.github.glowingpotato.fastredstone.graph.DAG;
 import com.github.glowingpotato.fastredstone.graph.Edge;
 import com.github.glowingpotato.fastredstone.graph.Vertex;
+import com.github.glowingpotato.fastredstone.simulator.DelayMapping;
+import com.github.glowingpotato.fastredstone.simulator.IOMapping;
 import com.github.glowingpotato.fastredstone.util.KeyValuePair;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,14 +26,24 @@ public class WireGraphData extends WorldSavedData {
 	/**
 	 * Boolean isSource
 	 */
-	private HashMap<Vertex, KeyValuePair<BlockPos, Boolean>> vertexMapping;
+	Collection<IOMapping> inputs = new ArrayList<IOMapping>();
+	Collection<DelayMapping> delays = new ArrayList<DelayMapping>();
+	Collection<IOMapping> outputs = new ArrayList<IOMapping>();
 
 	public WireGraphData() {
 		super(DATA_NAME);
 	}
 
-	public HashMap<Vertex, KeyValuePair<BlockPos, Boolean>> getVertexMapping() {
-		return vertexMapping;
+	public Collection<IOMapping> getInputMapping() {
+		return inputs;
+	}
+
+	public Collection<DelayMapping> getDelayMapping() {
+		return delays;
+	}
+
+	public Collection<IOMapping> getOutputMapping() {
+		return outputs;
 	}
 
 	public DAG getGraph() {
