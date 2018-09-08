@@ -29,6 +29,7 @@ public class SlowSimulator implements ISimulator {
 				inProgress.add(edge.getSink());
 			}
 		}
+		Set<Vertex> newProgress = new HashSet<>();
 		while (inProgress.size() > 0) {
 			Iterator<Vertex> it = inProgress.iterator();
 			mainLoop: while (it.hasNext()) {
@@ -47,10 +48,12 @@ public class SlowSimulator implements ISimulator {
 				for (Edge edge : vertex.getSourcedEdges()) {
 					Vertex sink = edge.getSink();
 					if (!done.containsKey(sink)) {
-						inProgress.add(sink);
+						newProgress.add(sink);
 					}
 				}
 			}
+			inProgress.addAll(newProgress);
+			newProgress.clear();
 		}
 		for (DelayMapping map : delays) {
 			map.setValue(!done.get(map.getSink()));
