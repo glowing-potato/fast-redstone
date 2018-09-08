@@ -13,7 +13,7 @@ import org.opentest4j.AssertionFailedError;
 @TestInstance(Lifecycle.PER_CLASS)
 class SyncAccessControllerTest {
 	private static final long SLEEP_PERIOD = 10;
-	private static final long ORDERING_SLEEP_PERIOD = 2;
+	private static final long ORDERING_SLEEP_PERIOD = 3;
 	private static final long TIMING_CHECKS = 10;
 	private SyncAccessController obj;
 
