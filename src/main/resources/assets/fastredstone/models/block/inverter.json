@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "fastredstone:blocks/inverterarrow",
+        "side": "fastredstone:blocks/inverter",
+        "front": "fastredstone:blocks/inverter"
+    }
+}
