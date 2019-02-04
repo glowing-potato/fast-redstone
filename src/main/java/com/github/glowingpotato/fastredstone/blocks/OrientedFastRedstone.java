@@ -9,7 +9,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class OrientedFastRedstone extends FastRedstone {
+public abstract class OrientedFastRedstone extends FastRedstone {
 
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 

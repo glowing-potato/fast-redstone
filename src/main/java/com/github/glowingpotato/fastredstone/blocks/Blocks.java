@@ -1,16 +1,19 @@
 package com.github.glowingpotato.fastredstone.blocks;
 
 import com.github.glowingpotato.fastredstone.FastRedstoneMod;
+import com.github.glowingpotato.fastredstone.tileentity.OutputTileEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod.EventBusSubscriber(modid = FastRedstoneMod.MODID)
 public class Blocks {
@@ -18,9 +21,9 @@ public class Blocks {
 	// Blocks
 	public static final Block WIRE = new Wire().setUnlocalizedName("wire").setHardness(1.0f).setRegistryName("wire");
 	public static final Block DELAYER = new Delayer().setUnlocalizedName("delayer").setHardness(1.0f).setRegistryName("delayer");
-	public static final Block INVERTER = new Delayer().setUnlocalizedName("inverter").setHardness(1.0f).setRegistryName("inverter");
-	public static final Block INPUT = new Delayer().setUnlocalizedName("input").setHardness(1.0f).setRegistryName("input");
-	public static final Block OUTPUT = new Delayer().setUnlocalizedName("output").setHardness(1.0f).setRegistryName("output");
+	public static final Block INVERTER = new Inverter().setUnlocalizedName("inverter").setHardness(1.0f).setRegistryName("inverter");
+	public static final Block INPUT = new Input().setUnlocalizedName("input").setHardness(1.0f).setRegistryName("input");
+	public static final Block OUTPUT = new Output().setUnlocalizedName("output").setHardness(1.0f).setRegistryName("output");
 
 	// ItemBlocks
 	public static final Item WIRE_ITEM = new ItemBlock(Blocks.WIRE).setRegistryName(Blocks.WIRE.getRegistryName());
@@ -36,6 +39,8 @@ public class Blocks {
 		event.getRegistry().register(Blocks.INVERTER);
 		event.getRegistry().register(Blocks.INPUT);
 		event.getRegistry().register(Blocks.OUTPUT);
+		
+		GameRegistry.registerTileEntity(OutputTileEntity.class, new ResourceLocation("tile.fastredstone.name"));
 	}
 
 	@SubscribeEvent
